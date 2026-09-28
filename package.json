@@ -1,15 +1,11 @@
 {
   "name": "dime",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix apps/api\" \"npm run dev --prefix apps/web\""
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "concurrently": "^10.0.5"
   }
