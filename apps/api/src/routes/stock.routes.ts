@@ -1,14 +1,10 @@
 import { Router } from "express";
+import { getAllStocks } from "../services/stock.service.ts";
 
 const router = Router();
 
-const stocks = [
-  { symbol: "AAPL", name: "Apple Inc.", price: 227.52 },
-  { symbol: "MSFT", name: "Microsoft Corporation", price: 511.14 },
-  { symbol: "GOOGL", name: "Alphabet Inc.", price: 168.32 },
-];
-
-router.get("/stocks", (_req, res) => {
+router.get("/stocks", async (_req, res) => {
+  const stocks = await getAllStocks();
   res.json({ status: "ok", data: stocks });
 });
 
