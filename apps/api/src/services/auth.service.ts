@@ -78,3 +78,36 @@ export async function login(email: string, password: string) {
     refreshToken,
   };
 }
+
+export async function refresh(rawToken: string) {
+  const tokenHash = hashRefreshToken(rawToken);
+  const existing = await prisma.refreshToken.findUnique({
+    where: { tokenHash },
+  });
+
+  if (!existing || existing.expiresAt < new Date()) {
+    throw new Error("INVALID_REFRESH_TOKEN");
+  }
+
+  const {
+    token: newRefreshToken,
+    tokenHash: newTokenHash,
+    expiresAt: newExpiresAt,
+  } = generateRefreshToken();
+
+  await prisma.$transaction([
+    prisma.refreshToken.delete({ where: { id: existing.id } }),
+    prisma.refreshToken.create({
+      data: { userId: existing.userId, tokenHash: newTokenHash, expiresAt: newExpiresAt },
+    }),
+  ]);
+
+  const accessToken = signAccessToken(existing.userId);
+
+  return { accessToken, refreshToken: newRefreshToken };
+}
+
+export async function logout(rawToken: string) {
+  const tokenHash = hashRefreshToken(rawToken);
+  await prisma.refreshToken.deleteMany({ where: { tokenHash } });
+}
