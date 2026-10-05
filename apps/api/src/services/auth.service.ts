@@ -111,3 +111,12 @@ export async function logout(rawToken: string) {
   const tokenHash = hashRefreshToken(rawToken);
   await prisma.refreshToken.deleteMany({ where: { tokenHash } });
 }
+
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) {
+    throw new Error("USER_NOT_FOUND");
+  }
+
+  return { id: user.id, email: user.email };
+}

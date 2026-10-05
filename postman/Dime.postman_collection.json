@@ -91,6 +91,19 @@
       "response": []
     },
     {
+      "name": "Me",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/auth/me",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "me"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Logout",
       "request": {
         "method": "POST",

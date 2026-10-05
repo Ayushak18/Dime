@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { signup, login, refresh, logout } from "../services/auth.service.ts";
+import { signup, login, refresh, logout, getUserById } from "../services/auth.service.ts";
+import { requireAuth } from "../middleware/requireAuth.ts";
 
 const router = Router();
 
@@ -92,6 +93,11 @@ router.post("/auth/logout", async (req, res) => {
   res.clearCookie("accessToken", accessTokenCookieOptions);
   res.clearCookie("refreshToken", refreshTokenCookieOptions);
   res.json({ status: "ok" });
+});
+
+router.get("/auth/me", requireAuth, async (req, res) => {
+  const user = await getUserById(req.userId as string);
+  res.json({ status: "ok", data: user });
 });
 
 export default router;
