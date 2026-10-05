@@ -1,5 +1,6 @@
 {
   "info": {
+    "_postman_id": "3f9cc6d2-6b78-4724-8f57-8c2dda686371",
     "name": "Dime API",
     "description": "Endpoints for the Dime API (apps/api). Add a new request here whenever a new route is added.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -34,6 +35,70 @@
           "raw": "{{base_url}}/stocks",
           "host": ["{{base_url}}"],
           "path": ["stocks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/signup",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "signup"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Refresh",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/auth/refresh",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "refresh"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/auth/logout",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "logout"]
         }
       },
       "response": []
