@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import healthRouter from "./routes/health.routes.ts";
 import stocksRouter from "./routes/stock.routes.ts";
+import authRouter from "./routes/auth.routes.ts";
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1", healthRouter);
 app.use("/api/v1", stocksRouter);
+app.use("/api/v1", authRouter);
 
 export default app;
